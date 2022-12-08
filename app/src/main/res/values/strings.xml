@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PokeDex</string>
+
+    <string name="pokemon_number_format">#%03d</string>
+    <string name="description">Description</string>
+    <string name="stats">Stats</string>
+    <string name="moves">Moves</string>
+    <string name="power">Power</string>
+    <string name="acc">Acc.</string>
+    <string name="pp">PP</string>
+    <string name="type">Type</string>
+    <string name="pok_dex">PoKéDex</string>
+    <string name="click_to_catch_pokemon">Click to catch pokemon</string>
+    <string name="pokemon_caught">Pokemon Caught</string>
+    <string name="release_pokemon">Release Pokemon</string>
+    <string name="error_check_connection">Error check your connection</string>
+    <string name="retry_error">Retry</string>
+    <string name="my_pokemon_list">My Pokemon List</string>
+</resources>

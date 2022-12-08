@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/homeFragment">
+
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.pokedex.presentation.home.HomeFragment"
+        android:label="PokeDex"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_pokemonCatchFragment"
+            app:destination="@id/pokemonCatchFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.pokedex.presentation.detail.DetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="pokemonName"
+            app:argType="string" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/pokemonCatchFragment"
+        android:name="com.pokedex.presentation.mypokemon.PokemonCatchFragment"
+        android:label="fragment_pokemon_catch"
+        tools:layout="@layout/fragment_pokemon_catch" >
+        <action
+            android:id="@+id/action_pokemonCatchFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+
+</navigation>
