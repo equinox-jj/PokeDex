@@ -16,7 +16,7 @@ interface ApiService {
 
     @GET(POKEMON_EP)
     suspend fun getListPokemon(
-        @Query("limit") limit: Int = 40,
+        @Query("limit") limit: Int = 60,
         @Query("offset") offset: Int = 0,
     ): PokemonResponseDTO
 
