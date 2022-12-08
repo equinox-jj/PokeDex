@@ -4,6 +4,7 @@ import com.pokedex.R
 import com.pokedex.domain.model.PokemonTypes
 
 fun pokemonImage(url: String?): String {
+    // "https://pokeapi.co/api/v2/pokemon/1/"
     val pokemonId = url?.split("/".toRegex())?.dropLast(1)?.last()
     return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonId.png"
 }
@@ -27,6 +28,7 @@ fun getTypeColor(type: PokemonTypes): Pair<Int, Int> {
         "dragon" -> Pair(R.color.dragon, R.drawable.ic_dragon_types)
         "fairy" -> Pair(R.color.fairy, R.drawable.ic_fairy_types)
         "dark" -> Pair(R.color.dark, R.drawable.ic_dark_types)
+        "normal" -> Pair(R.color.normal, R.drawable.ic_normal_types)
         else -> Pair(R.color.defaults, R.drawable.ic_launcher_foreground)
     }
 }

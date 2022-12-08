@@ -44,8 +44,8 @@
                     android:id="@+id/ivDetailBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/bg_back_button"
                     android:contentDescription="@null"
                     android:padding="8dp"
@@ -57,12 +57,12 @@
                     android:id="@+id/tvPokeNumberDet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_bold"
                     android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivDetailBack"
                     tools:text="#001" />
 
                 <ImageView

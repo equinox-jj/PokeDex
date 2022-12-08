@@ -63,6 +63,9 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
+    // Coil Image
+    implementation("io.coil-kt:coil:$coil_version")
+
     // Palette Color
     implementation ("androidx.palette:palette-ktx:$palette_version")
 
@@ -71,4 +74,7 @@ dependencies {
 
     // Lotti Animation
     implementation ("com.airbnb.android:lottie:$lottie_version")
+
+    // Splash Screen
+    implementation("androidx.core:core-splashscreen:$splash_screen_version")
 }

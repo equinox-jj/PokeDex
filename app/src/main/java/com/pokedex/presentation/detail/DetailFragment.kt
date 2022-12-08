@@ -21,7 +21,6 @@ import com.pokedex.domain.utils.Resource
 import com.pokedex.presentation.detail.adapter.MovesAdapter
 import com.pokedex.utils.getTypeColor
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.random.Random
 
 @AndroidEntryPoint
 class DetailFragment : Fragment(R.layout.fragment_detail) {
@@ -31,8 +30,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val args by navArgs<DetailFragmentArgs>()
     private val detailViewModel by viewModels<DetailViewModel>()
-
-    private lateinit var movesAdapter: MovesAdapter
+    private var movesAdapter: MovesAdapter? = null
 
     private lateinit var pokemonDetailResponse: PokemonDetailResponse
     private var pokemonName = ""
@@ -57,11 +55,15 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             binding.refreshDetail.isRefreshing = false
         }
         binding.ivPokemonCatch.setOnClickListener {
-            val percentage = Random.nextInt() < 0.5 // Kalo kurang dari 50% false
+            val percentage = Math.random() < 0.5 // Kalo kurang dari 50% false
 
             if (percentage) {
                 insertPokemonCatched()
-                Toast.makeText(context, "You Caught ${pokemonName.replaceFirstChar { it.uppercase() }}!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "You Caught ${pokemonName.replaceFirstChar { it.uppercase() }}!!",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 Toast.makeText(context, "Oops Try Again", Toast.LENGTH_SHORT).show()
             }
@@ -94,7 +96,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 is Resource.Error -> {
                     binding.pbDetail.visibility = View.GONE
                     binding.constraintDetContent.visibility = View.GONE
-                    Snackbar.make(binding.root, getString(R.string.error_check_connection), Snackbar.LENGTH_INDEFINITE).show()
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.error_check_connection),
+                        Snackbar.LENGTH_INDEFINITE
+                    ).show()
                 }
             }
         }
@@ -114,7 +120,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private fun initView(data: PokemonDetailResponse) {
         binding.apply {
-            data.moves?.let { movesAdapter.setData(it) }
+            data.moves?.let { movesAdapter?.setData(it) }
             tvPokeNumberDet.text = getString(R.string.pokemon_number_format, data.id)
             tvPokeNameDet.text = data.name?.replaceFirstChar { it.uppercase() }
             binding.tvHpPoke.text = data.stats?.get(0)?.baseStat.toString()
@@ -138,6 +144,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 )
             }
             setPokemonTypes(data.types)
+
             pokemonDetailResponse = PokemonDetailResponse(
                 id = data.id,
                 sprites = data.sprites,
@@ -153,7 +160,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun setPokemonSpecies(species: List<FlavorTextEntries>) {
-        var pokemonDesc = species[1].flavorText
+        var index = species.lastIndex
+        while (species[index].language?.name != "en") {
+            index--
+        }
+        var pokemonDesc = species[index].flavorText
         pokemonDesc = pokemonDesc?.replace("POKéMON", "Pokémon")
         pokemonDesc = pokemonDesc?.replace("\n", " ")
         pokemonDesc = pokemonDesc?.replace("\u000c", " ")
@@ -238,6 +249,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        movesAdapter = null
         _binding = null
     }
 }

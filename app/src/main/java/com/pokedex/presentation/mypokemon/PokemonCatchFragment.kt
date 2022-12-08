@@ -18,7 +18,7 @@ class PokemonCatchFragment : Fragment(R.layout.fragment_pokemon_catch) {
     private var _binding: FragmentPokemonCatchBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var pokemonCatchAdapter: PokemonCatchAdapter
+    private var pokemonCatchAdapter: PokemonCatchAdapter? = null
     private val pokemonCatchViewModel by viewModels<PokemonCatchViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,7 +43,7 @@ class PokemonCatchFragment : Fragment(R.layout.fragment_pokemon_catch) {
         pokemonCatchViewModel.getPokemonCatched.observe(viewLifecycleOwner) { entity ->
             if (entity.isNotEmpty()) {
                 checkPokemonCatched(true)
-                pokemonCatchAdapter.setData(entity)
+                pokemonCatchAdapter?.setData(entity)
             } else {
                 checkPokemonCatched(false)
             }
@@ -76,11 +76,7 @@ class PokemonCatchFragment : Fragment(R.layout.fragment_pokemon_catch) {
         builder.setMessage("Are you sure you want to remove all pokemon?")
         builder.setPositiveButton("Yes") { _, _ ->
             pokemonCatchViewModel.removeAllPokemon()
-            Toast.makeText(
-                requireContext(),
-                "Successfully remove all pokemon",
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast.makeText(requireContext(), "Successfully remove all pokemon", Toast.LENGTH_SHORT).show()
         }
         builder.setNegativeButton("No") { _, _ -> }
         builder.create().show()
@@ -88,6 +84,7 @@ class PokemonCatchFragment : Fragment(R.layout.fragment_pokemon_catch) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        pokemonCatchAdapter = null
         _binding = null
     }
 }

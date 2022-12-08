@@ -19,7 +19,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding get() = _binding!!
 
     private val homeViewModel by viewModels<HomeViewModel>()
-    private lateinit var homeAdapter: PokemonListAdapter
+
+    /**
+     * @see private lateinit homeAdapter: this is make memory
+     * leak whenever navigate through fragment*/
+//    private lateinit var homeAdapter: PokemonListAdapter
+    private var homeAdapter: PokemonListAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentHomeBinding.bind(view)
@@ -58,16 +63,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 is Resource.Success -> {
                     binding.pbHome.visibility = View.GONE
                     binding.rvHome.visibility = View.VISIBLE
-                    response.data?.let { homeAdapter.setData(it) }
+                    response.data?.let { homeAdapter?.setData(it) }
                 }
                 is Resource.Error -> {
                     binding.pbHome.visibility = View.GONE
                     binding.rvHome.visibility = View.GONE
-                    Snackbar.make(
-                        binding.root,
-                        getString(R.string.error_check_connection),
-                        Snackbar.LENGTH_INDEFINITE
-                    ).show()
+                    Snackbar.make(binding.root, getString(R.string.error_check_connection), Snackbar.LENGTH_INDEFINITE).show()
                 }
             }
         }
@@ -75,6 +76,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        homeAdapter = null
         _binding = null
     }
 }

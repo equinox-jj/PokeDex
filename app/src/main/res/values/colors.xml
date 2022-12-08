@@ -10,6 +10,7 @@
 
     <color name="divider_color">#454444</color>
     <color name="search_color">#F0E4E4</color>
+    <color name="splash_screen_color">#EDE9E9</color>
 
     <!-- Pokemon Type -->
     <color name="normal">#A8A77A</color>
