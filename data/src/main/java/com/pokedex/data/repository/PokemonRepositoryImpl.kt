@@ -16,8 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import okio.IOException
-import retrofit2.HttpException
 import javax.inject.Inject
 
 class PokemonRepositoryImpl @Inject constructor(
@@ -31,11 +29,7 @@ class PokemonRepositoryImpl @Inject constructor(
             val result = apiService.getListPokemon().results.map { it.resultDtoToDomain() }
             emit(Resource.Success(result))
         } catch (e: Exception) {
-            emit(Resource.Error(e.localizedMessage ?: ""))
-        } catch (e: IOException) {
-            emit(Resource.Error(e.localizedMessage ?: ""))
-        } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: ""))
+            emit(Resource.Error(e.localizedMessage ?: "An Unknown Error Occurred."))
         }
     }.flowOn(Dispatchers.IO)
 
@@ -45,11 +39,7 @@ class PokemonRepositoryImpl @Inject constructor(
             val result = apiService.getSinglePokemon(name).responseDetailDtoToDomain()
             emit(Resource.Success(result))
         } catch (e: Exception) {
-            emit(Resource.Error(e.localizedMessage ?: ""))
-        } catch (e: IOException) {
-            emit(Resource.Error(e.localizedMessage ?: ""))
-        } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: ""))
+            emit(Resource.Error(e.localizedMessage ?: "An Unknown Error Occurred."))
         }
     }.flowOn(Dispatchers.IO)
 
@@ -59,11 +49,7 @@ class PokemonRepositoryImpl @Inject constructor(
             val result = apiService.getPokemonSpecies(name).speciesDtoToDOmain()
             emit(Resource.Success(result))
         } catch (e: Exception) {
-            emit(Resource.Error(e.localizedMessage ?: ""))
-        } catch (e: IOException) {
-            emit(Resource.Error(e.localizedMessage ?: ""))
-        } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: ""))
+            emit(Resource.Error(e.localizedMessage ?: "An Unknown Error Occurred."))
         }
     }.flowOn(Dispatchers.IO)
 
@@ -73,11 +59,7 @@ class PokemonRepositoryImpl @Inject constructor(
             val result = apiService.getPokemonMoves(name).moveResponseDtoToDomain()
             emit(Resource.Success(result))
         } catch (e: Exception) {
-            emit(Resource.Error(e.localizedMessage ?: ""))
-        } catch (e: IOException) {
-            emit(Resource.Error(e.localizedMessage ?: ""))
-        } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: ""))
+            emit(Resource.Error(e.localizedMessage ?: "An Unknown Error Occurred."))
         }
     }.flowOn(Dispatchers.IO)
 

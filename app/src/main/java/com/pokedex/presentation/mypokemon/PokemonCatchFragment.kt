@@ -63,9 +63,11 @@ class PokemonCatchFragment : Fragment(R.layout.fragment_pokemon_catch) {
     }
 
     private fun initRecycler() {
-        pokemonCatchAdapter = PokemonCatchAdapter()
-        binding.rvPokemonCatch.adapter = pokemonCatchAdapter
-        binding.rvPokemonCatch.setHasFixedSize(true)
+        binding.rvPokemonCatch.apply {
+            pokemonCatchAdapter = PokemonCatchAdapter()
+            adapter = pokemonCatchAdapter
+            setHasFixedSize(true)
+        }
     }
 
     private fun alertDialog() {

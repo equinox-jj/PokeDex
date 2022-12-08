@@ -3,13 +3,6 @@ package com.pokedex.data.mapper
 import com.pokedex.data.source.remote.dto.*
 import com.pokedex.domain.model.*
 
-fun PokemonResponseDTO.responseDtoToDomain(): PokemonResponse {
-    return PokemonResponse(
-        count = count,
-        result = results.map { it.resultDtoToDomain() }
-    )
-}
-
 fun ResultsItemDTO.resultDtoToDomain(): PokemonResult {
     return PokemonResult(
         name = name,
