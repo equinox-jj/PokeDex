@@ -16,4 +16,11 @@
     <string name="error_check_connection">Error check your connection</string>
     <string name="retry_error">Retry</string>
     <string name="my_pokemon_list">My Pokemon List</string>
+    <string name="no_pokemon_catched_yet">No pokemon catched yet.</string>
+    <string name="hp">HP</string>
+    <string name="attack">Attack</string>
+    <string name="defense">Defense</string>
+    <string name="special_attack">Special Attack</string>
+    <string name="special_defense">Special Defense</string>
+    <string name="speed">Speed</string>
 </resources>

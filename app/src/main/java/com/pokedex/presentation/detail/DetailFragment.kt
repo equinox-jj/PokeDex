@@ -61,11 +61,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
             if (percentage) {
                 insertPokemonCatched()
-                Toast.makeText(
-                    context,
-                    "You Caught ${pokemonName.replaceFirstChar { it.uppercase() }}!!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(context, "You Caught ${pokemonName.replaceFirstChar { it.uppercase() }}!!", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(context, "Oops Try Again", Toast.LENGTH_SHORT).show()
             }
@@ -87,25 +83,18 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         detailViewModel.detailState.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Resource.Loading -> {
-                    binding.ivPokemonCatch.visibility = View.GONE
-                    binding.chipTypes1.visibility = View.GONE
-                    binding.chipTypes2.visibility = View.GONE
+                    binding.pbDetail.visibility = View.VISIBLE
+                    binding.constraintDetContent.visibility = View.GONE
                 }
                 is Resource.Success -> {
-                    binding.ivPokemonCatch.visibility = View.VISIBLE
-                    binding.chipTypes1.visibility = View.VISIBLE
-                    binding.chipTypes2.visibility = View.VISIBLE
+                    binding.pbDetail.visibility = View.GONE
+                    binding.constraintDetContent.visibility = View.VISIBLE
                     response.data?.let { initView(it) }
                 }
                 is Resource.Error -> {
-                    binding.ivPokemonCatch.visibility = View.GONE
-                    binding.chipTypes1.visibility = View.GONE
-                    binding.chipTypes2.visibility = View.GONE
-                    Snackbar.make(
-                        binding.root,
-                        getString(R.string.error_check_connection),
-                        Snackbar.LENGTH_INDEFINITE
-                    ).show()
+                    binding.pbDetail.visibility = View.GONE
+                    binding.constraintDetContent.visibility = View.GONE
+                    Snackbar.make(binding.root, getString(R.string.error_check_connection), Snackbar.LENGTH_INDEFINITE).show()
                 }
             }
         }

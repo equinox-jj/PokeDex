@@ -61,14 +61,28 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieNoData"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39999998"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/pokemon_dig" />
+
+    <TextView
+        android:id="@+id/tvPokemonNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/no_pokemon_catched_yet"
+        android:textSize="20sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/lottieNoData"
+        app:layout_constraintStart_toStartOf="@+id/lottieNoData"
+        app:layout_constraintTop_toBottomOf="@+id/lottieNoData" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

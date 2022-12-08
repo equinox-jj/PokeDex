@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.pokedex.R
 import com.pokedex.databinding.FragmentPokemonCatchBinding
 import com.pokedex.presentation.mypokemon.adapter.PokemonCatchAdapter
@@ -33,6 +34,9 @@ class PokemonCatchFragment : Fragment(R.layout.fragment_pokemon_catch) {
         binding.fabPokemonCatch.setOnClickListener {
             alertDialog()
         }
+        binding.ivPokemonCatchBack.setOnClickListener {
+            it.findNavController().popBackStack()
+        }
     }
 
     private fun initObserver() {
@@ -49,8 +53,12 @@ class PokemonCatchFragment : Fragment(R.layout.fragment_pokemon_catch) {
     private fun checkPokemonCatched(isPokemonCatched: Boolean) {
         if (isPokemonCatched) {
             binding.rvPokemonCatch.visibility = View.VISIBLE
+            binding.lottieNoData.visibility = View.GONE
+            binding.tvPokemonNoData.visibility = View.GONE
         } else {
             binding.rvPokemonCatch.visibility = View.GONE
+            binding.lottieNoData.visibility = View.VISIBLE
+            binding.tvPokemonNoData.visibility = View.VISIBLE
         }
     }
 
