@@ -173,35 +173,35 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun setPokemonTypes(type: List<PokemonTypes>?) {
-        type?.forEach { pokemonTypes ->
-            val indexSlot = pokemonTypes.slot
-            val typeName = pokemonTypes.type
-            val pokemonExtension = getTypeColor(pokemonTypes)
-            val typesColor = pokemonExtension.first
-            val typesIcon = pokemonExtension.second
+        type?.forEachIndexed { index, pokemonTypes ->
+            val typeName = pokemonTypes.type?.name
+            val pokemonType = getTypeColor(pokemonTypes)
+            val typeColor = pokemonType.first
+            val typeIcon = pokemonType.second
 
-            when (indexSlot) {
-                1 -> {
-                    binding.chipTypes1.text = typeName?.name?.replaceFirstChar { it.uppercase() }
-                    binding.chipTypes1.setChipBackgroundColorResource(typesColor)
-                    binding.chipTypes1.setChipIconResource(typesIcon)
+            when (index) {
+                0 -> {
+                    binding.chipTypes1.text = typeName?.replaceFirstChar { it.uppercase() }
+                    binding.chipTypes1.setChipBackgroundColorResource(typeColor)
+                    binding.chipTypes1.setChipIconResource(typeIcon)
                 }
-                2 -> {
-                    binding.chipTypes2.text = typeName?.name?.replaceFirstChar { it.uppercase() }
-                    binding.chipTypes2.setChipBackgroundColorResource(typesColor)
-                    binding.chipTypes2.setChipIconResource(typesIcon)
+                1 -> {
+                    binding.chipTypes2.text = typeName?.replaceFirstChar { it.uppercase() }
+                    binding.chipTypes2.setChipBackgroundColorResource(typeColor)
+                    binding.chipTypes2.setChipIconResource(typeIcon)
                 }
             }
-            if (type.size == 1) binding.chipTypes2.visibility = View.GONE
-            else binding.chipTypes2.visibility = View.VISIBLE
         }
+        if (type?.size == 1) binding.chipTypes2.visibility = View.GONE
+        else binding.chipTypes2.visibility = View.VISIBLE
     }
 
     private fun checkPokemonCatched() {
         detailViewModel.getPokemonCatched.observe(viewLifecycleOwner) { list ->
             try {
-                list.forEach {
-                    if (it.name == args.pokemonName) {
+                list
+                    .filter { it.name == args.pokemonName }
+                    .forEach {
                         binding.ivPokemonCatch.setImageResource(R.drawable.img_close_pokeball)
                         binding.tvPokemonCatch.text = getString(R.string.pokemon_caught)
                         binding.btnRelease.visibility = View.VISIBLE
@@ -211,7 +211,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         pokemonName = it.name!!
                         isCatched = true
                     }
-                }
             } catch (e: Exception) {
                 isCatched = false
             }
