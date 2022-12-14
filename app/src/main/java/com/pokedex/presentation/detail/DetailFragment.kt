@@ -159,17 +159,19 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
     }
 
-    private fun setPokemonSpecies(species: List<FlavorTextEntries>) {
-        var index = species.lastIndex
-        while (species[index].language?.name != "en") {
-            index--
-        }
-        var pokemonDesc = species[index].flavorText
-        pokemonDesc = pokemonDesc?.replace("POKéMON", "Pokémon")
-        pokemonDesc = pokemonDesc?.replace("\n", " ")
-        pokemonDesc = pokemonDesc?.replace("\u000c", " ")
-
-        binding.tvPokemonDesc.text = pokemonDesc
+    private fun setPokemonSpecies(species: List<FlavorTextEntries?>) {
+        species
+            .filterNotNull()
+            .filter { it.language?.name?.trim()?.contains("en".lowercase()) == true }
+            .take(1)
+            .map {
+                val format = it.flavorText
+                    ?.trim()
+                    ?.replace("\n", " ")
+                    ?.replace("\u000c", " ")
+                    ?.replace("POKéMON", "Pokémon")
+                binding.tvPokemonDesc.text = format
+            }
     }
 
     private fun setPokemonTypes(type: List<PokemonTypes>?) {
