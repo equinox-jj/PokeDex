@@ -21,9 +21,6 @@ class HomeViewModel @Inject constructor(
     private val _state = MutableLiveData<Resource<List<PokemonResult>>>()
     val state: LiveData<Resource<List<PokemonResult>>> = _state
 
-    private val _search = MutableLiveData<Resource<List<PokemonResult>>>()
-    val search: LiveData<Resource<List<PokemonResult>>> = _state
-
     init {
         getListPokemon()
     }
