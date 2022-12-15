@@ -123,12 +123,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             data.moves?.let { movesAdapter?.setData(it) }
             tvPokeNumberDet.text = getString(R.string.pokemon_number_format, data.id)
             tvPokeNameDet.text = data.name?.replaceFirstChar { it.uppercase() }
-            binding.tvHpPoke.text = data.stats?.get(0)?.baseStat.toString()
-            binding.tvAttackPoke.text = data.stats?.get(1)?.baseStat.toString()
-            binding.tvDefensePoke.text = data.stats?.get(2)?.baseStat.toString()
-            binding.tvSpecialAttackPoke.text = data.stats?.get(3)?.baseStat.toString()
-            binding.tvSpecialDefensePoke.text = data.stats?.get(4)?.baseStat.toString()
-            binding.tvSpeedPoke.text = data.stats?.get(5)?.baseStat.toString()
+            tvHpPoke.text = data.stats?.get(0)?.baseStat.toString()
+            tvAttackPoke.text = data.stats?.get(1)?.baseStat.toString()
+            tvDefensePoke.text = data.stats?.get(2)?.baseStat.toString()
+            tvSpecialAttackPoke.text = data.stats?.get(3)?.baseStat.toString()
+            tvSpecialDefensePoke.text = data.stats?.get(4)?.baseStat.toString()
+            tvSpeedPoke.text = data.stats?.get(5)?.baseStat.toString()
             ivPokeImageDet.load(data.sprites.other?.officialArtwork?.frontDefault) {
                 allowHardware(false)
                 crossfade(200)
